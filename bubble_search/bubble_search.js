@@ -1,32 +1,21 @@
-// var bubble_search = function(list) {
-//   var swap;
-//   do {
-//     swap = false;
-
-//     console.log('Hello there');
-//     for (var i = 0, n = list.lenght; i < n-1; i++) {
-//       console.log('entered the loop');
-//       if (list[i] > list[i+1]) {
-//         var temp = list[i];
-//         list[i] = list[i+1];
-//         list[i+1] = temp;
-//         swap = true;
-//       }
-//     }
-//   } while (swap === true)
-// }
-
-// s = [4,9,7,1,3,6,5]
-
-// // console.log(bubble_search(s))
-
-// bubble_search(s)
-
-var bubble_search = function(list) {
-    for (var i = 0, n = list.lenght; i < n-1; i++) {
-      console.log('entered the loop');
-      if (list[i] > list[i+1]) {
-        var temp = list[i];
-        list[i] = list[i+1];
-        list[i+1] = temp;
+function bubble_search(list) {
+	// keep looping until all passes in the step would be without any change
+	var cond = true;
+	while (cond) {
+		cond = false;
+		for (var i = 0; i < list.length-1; i++) {
+			if (list[i] > list[i+1]) {
+				var temp = list[i];
+				list[i] = list[i+1];
+				list[i+1] = temp;
+				cond = true;
+			}
+		}
+	}
+	return list;
 }
+
+// var unsorted = [2, 6, 1, 7, 4, 9];
+// bubble_search(unsorted);
+
+module.exports = bubble_search
