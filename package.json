@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/Nephasis/Algorithms/issues"
   },
-  "homepage": "https://github.com/Nephasis/Algorithms#readme"
+  "homepage": "https://github.com/Nephasis/Algorithms#readme",
+  "devDependencies": {
+    "jest": "^20.0.4"
+  }
 }
