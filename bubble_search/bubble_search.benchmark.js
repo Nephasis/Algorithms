@@ -3,7 +3,7 @@ var Benchmark = require('../benchmark.js/benchmark');
 var suite = new Benchmark.Suite;
 
 function randomArray(len) {
-  var randArray = Array.from(Array(len).keys()).shift();
+  var randArray = Array.from(Array(len).keys());
 
   var shuffle = function() {
     for (var i = randArray.length - 1; i > 0; i--) {
@@ -13,18 +13,19 @@ function randomArray(len) {
       randArray[j] = temp;
     } 
   }();
-  return randArray
+  return randArray;
 }
 var rand50 = randomArray(50);
-var rand1mil = randomArray(1000000);
+var rand100k = randomArray(100000);
 
 suite.add('Bubble search with 50 elements', function() { 
   return bubble_search(rand50);
 })
-.add('Bubble search with 1.000.000 elements', function() { 
-  return bubble_search(rand1mil);
+.add('Bubble search with 100.000 elements', function() { 
+  return bubble_search(rand100k);
 })
 .on('cycle', function(event) {
   console.log(String(event.target));
 })
 .run({'async': true});
+
