@@ -1,5 +1,4 @@
 function selection_sort(list) {
-  debugger;
   for (var i = 0, l = list.length; i < l; i++) {
     var index = 0,
         smallest = list[i];
@@ -10,13 +9,9 @@ function selection_sort(list) {
         list[j] = temp;
         break;
       }
-
     }
   }
   return list
 }
-
-// var unsorted = [2, 6, 1, 7, 4, 9];
-// selection_sort(unsorted)
 
 module.exports = selection_sort;
