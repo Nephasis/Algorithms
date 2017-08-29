@@ -1,6 +1,14 @@
 const bubble_search = require('./bubble_search');
-var Benchmark = require('../benchmark.js/benchmark');
+var Benchmark = require('benchmark');
 var suite = new Benchmark.Suite;
+
+// function shuffle() {
+//   for (var i = randArray.length - 1; i > 0; i--) {
+//     var j = Math.floor(Math.random() * (i + 1));
+//     var temp = randArray[i];
+//     randArray[i] = randArray[j];
+//     randArray[j] = temp;
+// }
 
 function randomArray(len) {
   var randArray = Array.from(Array(len).keys());
