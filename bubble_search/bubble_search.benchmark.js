@@ -15,12 +15,14 @@ function randomArray(len) {
   }();
   return randArray
 }
+var rand50 = randomArray(50);
+var rand1mil = randomArray(1000000);
 
-suite.add('Selection sort with 50 elements', function() { 
-  return bubble_search(randomArray(50));
+suite.add('Bubble search with 50 elements', function() { 
+  return bubble_search(rand50);
 })
-.add('Selection sort with 100000 elements', function() { 
-  return bubble_search(randomArray(100000));
+.add('Bubble search with 1.000.000 elements', function() { 
+  return bubble_search(rand1mil);
 })
 .on('cycle', function(event) {
   console.log(String(event.target));
