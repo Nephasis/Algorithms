@@ -15,6 +15,13 @@ function randomizeArray(i, array, min, max) {
   return randomizeArray(i+1, randArray, min, max);
 }
 
+function randomizeArrayReduce(array, min, max) {
+  return [...array].reduce(function(newArray=[randomNumber(min, max)], current) {
+    return[...newArray, randomNumber(min, max)];
+  })
+}
+
 exports.createArray = createArray;
 exports.randomizeArray = randomizeArray;
+exports.randomizeArrayReduce = randomizeArrayReduce;
 module.exports
