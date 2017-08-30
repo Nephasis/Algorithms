@@ -1,17 +1,18 @@
 function selection_sort(list) {
-  for (var i = 0, l = list.length; i < l; i++) {
+  var sortedList = [...list];
+  for (var i = 0, l = sortedList.length; i < l; i++) {
     var index = 0,
-        smallest = list[i];
+        smallest = sortedList[i];
     for (var j = i + 1; j < l; j++) {
-      if (list[j] < smallest) {
-        var temp = list[i];
-        list[i] = list[j];
-        list[j] = temp;
+      if (sortedList[j] < smallest) {
+        var temp = sortedList[i];
+        sortedList[i] = sortedList[j];
+        sortedList[j] = temp;
         break;
       }
     }
   }
-  return list
+  return sortedList
 }
 
 module.exports = selection_sort;
