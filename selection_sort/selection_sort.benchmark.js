@@ -1,30 +1,24 @@
 const selection_sort = require('./selection_sort');
-var Benchmark = require('../benchmark.js/benchmark');
+const rand = require('./random_array');
+var Benchmark = require('benchmark');
 var suite = new Benchmark.Suite;
 
-function randomArray(len) {
-  var randArray = Array.from(Array(len).keys());
+var arr50 = rand.createArray(50);
+var rand50 = rand.randomizeArray(0, arr50, 0, 50);
 
-  var shuffle = function() {
-    for (var i = randArray.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = randArray[i];
-      randArray[i] = randArray[j];
-      randArray[j] = temp;
-    } 
-  }();
-  return randArray
-}
+var arr1k = rand.createArray(1000);
+var rand1k = rand.randomizeArray(0, arr1k, 0, 1000);
 
-var rand50 = randomArray(50);
-var rand100k = randomArray(100000);
+var sorted1k = [...rand1k].sort(function(a, b){return a-b});
 
-
-suite.add('Selection sort with 50 elements', function() { 
+suite.add('Selection sort with 50 elements in unsorted list', function() { 
   return selection_sort(rand50);
 })
-.add('Selection sort with 1000000 elements', function() { 
-  return selection_sort(rand100k);
+.add('Selection sort with 1000 elements in unsorted list', function() { 
+  return selection_sort(rand1k);
+})
+.add('Selection sort with 1000 elements in sorted list', function() {
+  return selection_sort(sorted1k);
 })
 .on('cycle', function(event) {
   console.log(String(event.target));
