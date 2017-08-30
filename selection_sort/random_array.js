@@ -7,7 +7,6 @@ function createArray(len) {
 }
 
 function randomizeArray(i, array, min, max) {
-  debugger;
   var randArray = [...array];
   if (i === randArray.length) {
     return randArray
