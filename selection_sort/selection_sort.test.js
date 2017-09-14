@@ -1,24 +1,49 @@
 const selection_sort = require('./selection_sort');
-var rand = require('./random_array');
+var random = require('./random_array');
 
-var array = rand.createArray(20);
-var unsorted = rand.randomizeArray(0, array, 0, 50);
-var sorted = [...unsorted].sort(function(a, b){return a-b});
+var listOfIntegers = random.createRandomList(50, random.randomNumberFromMinToMax(0, 50));
+var listOfLetters = random.createRandomList(50, random.randomLetter());
+var listOfIdenticalElements = new Array(50).fill(1);
 
-var sortUnsortedJson = JSON.stringify(selection_sort(unsorted));
-var sortedJson = JSON.stringify(sorted);
-var sortSortedJson = JSON.stringify(selection_sort(sorted));
+var sortedListOfIntegers = [...listOfIntegers].sort(function(a, b){return a-b});
+var sortedListOfLetters = [...listOfLetters].sort();
 
-test('Given an unordered list, order items in increasing order', () => {
-    expect(sortUnsortedJson).toEqual(sortedJson);
+var selectionSortedListOfIntegersJson = JSON.stringify(selection_sort(listOfIntegers));
+var sortedListOfIntegersJson = JSON.stringify(sortedListOfIntegers);
+var selectionSortedSortedListOfIntegersJson = JSON.stringify(selection_sort(sortedListOfIntegers));
+
+var selectionSortedListOfLettersJson = JSON.stringify(selection_sort(listOfLetters));
+var sortedListOfLettersJson = JSON.stringify(sortedListOfLetters);
+var selectionSortedSortedListOfLettersJson = JSON.stringify(selection_sort(sortedListOfLetters));
+
+var listOfIdenticalElementsJson = JSON.stringify(listOfIdenticalElements);
+var selectionSortedListOfIdenticalElementsJson = JSON.stringify(selection_sort(listOfIdenticalElements));
+
+var unsorted = random.createRandomList(50, random.randomNumberFromMinToMax(0, 50));
+var unsordedJson = JSON.stringify(unsorted)
+
+test('Given an unordered list of numbers, puts them in increasing order', () => {
+  expect(selectionSortedListOfIntegersJson).toEqual(sortedListOfIntegersJson);
 })
 
-test('Given an ordered list return the input', () => {
-  expect(sortSortedJson).toEqual(sortedJson)
+test('Given an unordered list of letters, puts them in increasing order', () => {
+  expect(selectionSortedListOfLettersJson).toEqual(sortedListOfLettersJson);
 })
 
-// test('', () => {
-//     var unsortedJson = JSON.stringify(unsorted);
-//       selection_sort(unsorted);
-//     expect(unsortedJson).toEqual(JSON.stringify(unsorted));
-// })
+test('Given an ordered list of numbers returns the input', () => {
+  expect(selectionSortedSortedListOfIntegersJson).toEqual(sortedListOfIntegersJson);
+})
+
+test('Given an ordered list of letters returns the input', () => {
+  expect(selectionSortedSortedListOfLettersJson).toEqual(sortedListOfLettersJson);
+})
+
+test('Given a list of identical elements, returns the input', () => {
+  expect(selectionSortedListOfIdenticalElementsJson).toEqual(listOfIdenticalElementsJson);
+})
+
+test('Immutability test', () => {
+  var unsortedJson = JSON.stringify(unsorted);
+    selection_sort(unsorted);
+  expect(unsortedJson).toEqual(JSON.stringify(unsorted));
+})

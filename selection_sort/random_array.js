@@ -1,27 +1,28 @@
-function randomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min)
+function randomNumberFromMinToMax(min, max) {
+  return () => {
+    return Math.floor(Math.random() * (max - min + 1) + min)   
+  }
 }
 
-function createArray(len) {
-  return new Array(len)
+function randomLetter() {
+  return () => {
+    let shift = 9;
+    let number = randomNumberFromMinToMax(1, 25)() + shift;
+    return number.toString(36);
+  }
 }
 
-function randomizeArray(i, array, min, max) {
-  var randArray = [...array];
-  if (i === randArray.length) {
-    return randArray
-  } 
-  randArray[i] = randomNumber(min, max);
-  return randomizeArray(i+1, randArray, min, max);
+function createRandomList(length, elementGenerator, list = []) {
+  if (length === list.length) {
+    return list;
+  }
+  return createRandomList(length, elementGenerator, [...list, elementGenerator()]);
 }
 
-function randomizeArrayReduce(array, min, max) {
-  return [...array].reduce(function(newArray=[randomNumber(min, max)], current) {
-    return[...newArray, randomNumber(min, max)];
-  })
+module.exports = {
+  createRandomList : createRandomList,
+  randomNumberFromMinToMax : randomNumberFromMinToMax,
+  randomLetter : randomLetter
 }
 
-exports.createArray = createArray;
-exports.randomizeArray = randomizeArray;
-exports.randomizeArrayReduce = randomizeArrayReduce;
-module.exports
+
