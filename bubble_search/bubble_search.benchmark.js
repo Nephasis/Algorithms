@@ -1,39 +1,43 @@
 const bubble_search = require('./bubble_search');
+const random = require('./random_array');
 var Benchmark = require('benchmark');
 var suite = new Benchmark.Suite;
 
-// function shuffle() {
-//   for (var i = randArray.length - 1; i > 0; i--) {
-//     var j = Math.floor(Math.random() * (i + 1));
-//     var temp = randArray[i];
-//     randArray[i] = randArray[j];
-//     randArray[j] = temp;
-// }
+var listOfFiftyIntegers = random.createRandomList(50, random.randomNumberFromMinToMax(0, 50));
+var listOfThousandIntegers = random.createRandomList(1000, random.randomNumberFromMinToMax(0, 1000));
 
-function randomArray(len) {
-  var randArray = Array.from(Array(len).keys());
+var listOfFiftyLetters = random.createRandomList(50, random.randomLetter());
+var listOfThousandLetters = random.createRandomList(1000, random.randomLetter());
 
-  var shuffle = function() {
-    for (var i = randArray.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = randArray[i];
-      randArray[i] = randArray[j];
-      randArray[j] = temp;
-    } 
-  }();
-  return randArray;
-}
-var rand50 = randomArray(50);
-var rand100k = randomArray(100000);
+var sortedlistOfThousandIntegers = [...listOfThousandIntegers].sort(function(a, b){return a-b});
+var sortedlistOfThousandLetters = [...listOfThousandLetters].sort(function(a, b){return a-b});
 
-suite.add('Bubble search with 50 elements', function() { 
-  return bubble_search(rand50);
+
+suite.add('Creation of random array of 1000 random numbers using recursion', function() {
+  return random.createRandomList(1000, random.randomNumberFromMinToMax(0, 1000));
 })
-.add('Bubble search with 100.000 elements', function() { 
-  return bubble_search(rand100k);
+.add('Creation of random array of 1000 random letters using recursion', function() {
+  return random.createRandomList(1000, random.randomLetter());
+})
+.add('Selection sort with 50 random numbers in unsorted list', function() { 
+  return bubble_search(listOfFiftyIntegers);
+})
+.add('Selection sort with 50 random letters in unsorted list', function() { 
+  return bubble_search(listOfFiftyLetters);
+})
+.add('Selection sort with 1000 random numbers in unsorted list', function() { 
+  return bubble_search(listOfThousandIntegers);
+})
+.add('Selection sort with 1000 random letters in unsorted list', function() { 
+  return bubble_search(listOfThousandLetters);
+})
+.add('Selection sort with 1000 random numbers in sorted list', function() {
+  return bubble_search(sortedlistOfThousandIntegers);
+})
+.add('Selection sort with 1000 random letters in sorted list', function() { 
+  return bubble_search(sortedlistOfThousandLetters);
 })
 .on('cycle', function(event) {
   console.log(String(event.target));
 })
 .run({'async': true});
-
