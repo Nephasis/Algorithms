@@ -2,7 +2,7 @@ const bubble_search = require('./bubble_search');
 var random = require('./random_array');
 
 var listOfIntegers = random.createRandomList(50, random.randomNumberFromMinToMax(0, 50));
-var listOfLetters = random.createRandomList(50, random.randomLetter());
+var listOfLetters = random.createRandomList(50, random.randomLetter);
 var listOfIdenticalElements = new Array(50).fill(1);
 
 var sortedListOfIntegers = [...listOfIntegers].sort(function(a, b){return a-b});

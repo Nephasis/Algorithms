@@ -5,11 +5,9 @@ function randomNumberFromMinToMax(min, max) {
 }
 
 function randomLetter() {
-  return () => {
-    let shift = 9;
-    let number = randomNumberFromMinToMax(1, 25)() + shift;
-    return number.toString(36);
-  }
+  let shift = 9;
+  let number = randomNumberFromMinToMax(1, 25)() + shift;
+  return number.toString(36);
 }
 
 function createRandomList(length, elementGenerator, list = []) {
