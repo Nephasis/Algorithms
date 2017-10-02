@@ -23,5 +23,8 @@
   "homepage": "https://github.com/Nephasis/Algorithms#readme",
   "devDependencies": {
     "jest": "^20.0.4"
+  },
+  "dependencies": {
+    "benchmark": "^2.1.4"
   }
 }
